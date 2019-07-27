@@ -26,6 +26,37 @@
 
 
 
-fetch('https://jsonplaceholder.typicode.com/todos/1')
-    .then(response => response.json())
-    .then(json => console.log(json))
+
+async function play() {
+    await fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => response.json())
+        .then(data => data.map(item => {
+            document.write(`<li>${item.title}</li>`)
+        }))
+        .catch(error => document.write(error.message))
+
+}
+
+
+
+// document.querySelector('.table').innerHTML = play()
+
+
+
+
+const func1 = function () {
+    return new Promise((resolve, reject) => {
+        resolve('Currently waiting on')
+    })
+}
+
+
+const func2 = function (data) {
+    return new Promise((resolve, reject) => {
+        resolve(`${data} the brightline`)
+    })
+}
+
+func1()
+    .then((data) => func2(data))
+    .then(data => console.log(data))
